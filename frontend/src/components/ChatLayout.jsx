@@ -14,7 +14,7 @@ const ChatLayout = ({ children }) => {
     const fetchEvaluations = async () => {
       try {
         const token = localStorage.getItem('token');
-        const res = await axios.get('http://127.0.0.1:5100/api/evaluations', {
+        const res = await axios.get(`${import.meta.env.VITE_API_URL || 'http://127.0.0.1:5100'}/api/evaluations`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         setEvaluations(res.data);

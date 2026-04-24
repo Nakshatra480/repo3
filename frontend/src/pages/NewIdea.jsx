@@ -18,7 +18,7 @@ const NewIdea = () => {
     setError('');
     try {
       const token = localStorage.getItem('token');
-      const res = await axios.post('http://127.0.0.1:5100/api/evaluations', { idea }, {
+      const res = await axios.post(`${import.meta.env.VITE_API_URL || 'http://127.0.0.1:5100'}/api/evaluations`, { idea }, {
         headers: { Authorization: `Bearer ${token}` }
       });
       navigate(`/evaluation/${res.data._id}`);

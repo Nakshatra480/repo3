@@ -24,7 +24,7 @@ const EvaluationDetail = () => {
       setLoading(true);
       try {
         const token = localStorage.getItem('token');
-        const res = await axios.get(`http://127.0.0.1:5100/api/evaluations/${id}`, {
+        const res = await axios.get(`${import.meta.env.VITE_API_URL || 'http://127.0.0.1:5100'}/api/evaluations/${id}`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         setEvaluation(res.data);
@@ -51,7 +51,7 @@ const EvaluationDetail = () => {
     try {
       const token = localStorage.getItem('token');
       const res = await axios.post(
-        `http://127.0.0.1:5100/api/evaluations/${id}/chat`,
+        `${import.meta.env.VITE_API_URL || 'http://127.0.0.1:5100'}/api/evaluations/${id}/chat`,
         { message: userMessage, history: chatHistory.map(m => ({ role: m.role, content: m.type === 'analysis' ? '[Updated Analysis Report]' : m.content })) },
         { headers: { Authorization: `Bearer ${token}` } }
       );
