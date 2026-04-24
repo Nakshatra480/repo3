@@ -13,9 +13,10 @@ app.use(express.json());
 // Fallback to in-memory MongoDB if real URI is not provided
 const connectDB = async () => {
   try {
-    if (process.env.MONGODB_URI) {
-      await mongoose.connect(process.env.MONGODB_URI);
-      console.log('Connected to MongoDB');
+    const mongoUri = process.env.MONGODB_URI || process.env.MONGO_URI;
+    if (mongoUri) {
+      await mongoose.connect(mongoUri);
+      console.log('Connected to MongoDB Atlas');
     } else {
       console.log('No MONGODB_URI found, using in-memory database fallback');
       const { MongoMemoryServer } = require('mongodb-memory-server');
